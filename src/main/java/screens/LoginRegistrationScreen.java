@@ -21,7 +21,7 @@ public class LoginRegistrationScreen extends BaseScreen {
     }
 
     public String getLogin(){
-        return loginButtonView.getText();
+        return loginBtnView.getText();
 
     }
 }
