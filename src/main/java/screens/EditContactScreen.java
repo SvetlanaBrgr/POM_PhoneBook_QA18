@@ -4,7 +4,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.support.FindBy;
 
-public class EditContactScreen extends BaseScreen{
+public class EditContactScreen extends BaseScreen{//cw_25
     public EditContactScreen(AppiumDriver<MobileElement> driver) {
         super(driver);
     }
@@ -24,7 +24,7 @@ public class EditContactScreen extends BaseScreen{
     @FindBy(id = "com.sheygam.contactapp:id/updateBtn")
     MobileElement updateButton;
 
-    public ContactListScreen submitEditContactForm(){
+    public ContactListScreen submitEditContactForm(){//cw-25
         updateButton.click();
         return new ContactListScreen(driver);
     }

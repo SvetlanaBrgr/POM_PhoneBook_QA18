@@ -14,7 +14,7 @@ public class RegistrationTest extends AppiumConfig {
 
     @Test
     public void registrationSuccess(){
-        int i = new Random().nextInt(1000) + 1000;
+        int i = new Random().nextInt(1000) + 1000;//random
         new AuthenticationScreen(driver)
                 .fillEmail("emulator" + "_" + i + "@mail.ru")
                 .fillPassword("$Asdf1234")

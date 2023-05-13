@@ -21,7 +21,6 @@ public class ContactListScreen extends BaseScreen{
     //com.sheygam.contactapp:id/action_bar// android.widget.TextView
     MobileElement activityViewText;
 
-
     @FindBy(xpath = "//*[@content-desc = 'More options']")
     MobileElement moreOptions;
 
@@ -34,9 +33,9 @@ public class ContactListScreen extends BaseScreen{
 
     @FindBy(id = "com.sheygam.contactapp:id/rowContainer")
     List<MobileElement> contacts;
-    @FindBy(id = "com.sheygam.contactapp:id/rowName")
+    @FindBy(id = "com.sheygam.contactapp:id/rowName")//cw-25
     List<MobileElement> nameList;
-    @FindBy(id = "com.sheygam.contactapp:id/rowPhone")
+    @FindBy(id = "com.sheygam.contactapp:id/rowPhone")//cw-25
     List<MobileElement> phoneList;
 
     @FindBy(id = "android:id/button1")//locator - button yes
@@ -61,14 +60,14 @@ public class ContactListScreen extends BaseScreen{
         Assert.assertTrue(isContactListActivityPresent());
         return this;
     }
-    public AddNewContactScreen openContactForm() { //class AddNewContactTest
+    public AddNewContactScreen openContactForm() {
 //        waitElement(plusButton, 5);
-        if(isDisplayedWithException(plusButton))
+        if(isDisplayedWithException(plusButton))//cw-25 есть кнопка плюс- тогда кликай
             plusButton.click();
         return new AddNewContactScreen(driver);
     }
 
-    public ContactListScreen removeOneContact(){//method delete 1 contact by coordinates
+    public ContactListScreen removeOneContact(){//method delete 1 contact by coordinates in RemoveContactsTests
         waitElement(plusButton, 3);
         MobileElement contact = contacts.get(0);
         Rectangle rect = contact.getRect();
@@ -87,7 +86,7 @@ public class ContactListScreen extends BaseScreen{
         yesButton.click();
         return this;
     }
-    public EditContactScreen updateOneContact(){
+    public EditContactScreen updateOneContact(){//cw-25 in UpdateContactTests
         waitElement(plusButton, 3);
         MobileElement contact = contacts.get(0);
         Rectangle rect = contact.getRect();
@@ -96,7 +95,7 @@ public class ContactListScreen extends BaseScreen{
         int xStart = xEnd + (rect.getWidth() * 6) / 8;
         int y = rect.getY() + rect.getHeight() / 2;
 
-        TouchAction<?> touchAction = new TouchAction<>(driver);
+        TouchAction<?> touchAction = new TouchAction<>(driver);//cw-25
         touchAction.longPress(PointOption.point(xStart, y))
                 .moveTo(PointOption.point(xEnd, y))
                 .release()
@@ -105,7 +104,7 @@ public class ContactListScreen extends BaseScreen{
         return new EditContactScreen(driver);
     }
 
-    public ContactListScreen isContactAdded(Contact contact){
+    public ContactListScreen isContactAdded(Contact contact){ //cw-25 kak Assert
         boolean checkName = checkContainsText(nameList, contact.getName() + " "
                 + contact.getLastName());
         boolean checkPhone = checkContainsText(phoneList, contact.getPhone());
@@ -113,7 +112,7 @@ public class ContactListScreen extends BaseScreen{
         return this;
     }
 
-    public boolean checkContainsText(List<MobileElement> list, String text){
+    public boolean checkContainsText(List<MobileElement> list, String text){ //cw-25 is isContactAdded
         for (MobileElement e : list){
             if (e.getText().contains(text)) {
                 return true;

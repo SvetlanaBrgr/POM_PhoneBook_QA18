@@ -46,12 +46,12 @@ public class AddNewContactScreen extends BaseScreen {
         return new ContactListScreen(driver);
     }
 
-    public AddNewContactScreen submitContactFormNegative() {
+    public AddNewContactScreen submitContactFormNegative() {//cw-25 if field -Name empty
         createButton.click();
         return this;
     }
 
-    public AddNewContactScreen isErrorContainsText(String text) {
+    public AddNewContactScreen isErrorContainsText(String text) {//cw-25 window Error name=must
         Alert alert = new WebDriverWait(driver, 5)
                 .until(ExpectedConditions.alertIsPresent());
         driver.switchTo().alert();

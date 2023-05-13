@@ -13,12 +13,12 @@ import java.util.Random;
 
 public class AddNewContactTest extends AppiumConfig {
 
-    @BeforeClass
+    @BeforeClass//cw-25
     public void preCondition(){
         new AuthenticationScreen(driver)
                 .login(Auth.builder()
-                        .email("abcd@def.com")
-                        .password("$Abcdef12345")
+                        .email("test+1@mail.ru")
+                        .password("Qwer1234$")
                         .build());
     }
 
@@ -37,14 +37,15 @@ public class AddNewContactTest extends AppiumConfig {
                 .openContactForm()//method from class ContactListScreen
                 .fillContactForm(contact)
                 .submitContactForm();
-//                .isContactAdded(contact);
+//                .isContactAdded(contact);//cw-25 ???? red
     }
 
+
     @Test
-    public void addNewContactNegativeEmptyName() {
+    public void addNewContactNegativeEmptyName() {//method in AddNewContactScreen
         int i = new Random().nextInt(1000) + 1000;
         Contact contact = Contact.builder()
-//                .name("")
+//                .name(""Add_" + i")// field name empty --> delete .name(""Add_" + i")
                 .lastName("Negative")
                 .email("emptyName" + i + "@mail.com")
                 .phone("123456" + i)
@@ -52,32 +53,32 @@ public class AddNewContactTest extends AppiumConfig {
                 .description("New Contact_" + i)
                 .build();
         new ContactListScreen(driver)
-                .openContactForm()
+                .openContactForm()//method in ContactListScree
                 .fillContactForm(contact)
-                .submitContactFormNegative()
-                .isErrorContainsText("name=must not be blank")
+                .submitContactFormNegative()//method in AddNewContactScreen
+                .isErrorContainsText("name=must not be blank")//method in AddNewContactScreen
         ;
     }
     @Test
-    public void addNewContactNegativeEmptyPhone() {
+    public void addNewContactNegativeEmptyPhone() {//cw-25
         int i = new Random().nextInt(1000) + 1000;
         Contact contact = Contact.builder()
                 .name("Add_" + i)
                 .lastName("Negative")
                 .email("emptyPhone" + i + "@mail.com")
-//                .phone("")
+//                .phone("")// field phone empty --> delete .phone("123456" + i)
                 .address("Haifa")
                 .description("New Contact_" + i)
                 .build();
         new ContactListScreen(driver)
-                .openContactForm()
+                .openContactForm()//method in ContactListScree
                 .fillContactForm(contact)
-                .submitContactFormNegative()
-                .isErrorContainsText("phone=Phone number must")
+                .submitContactFormNegative()//method in AddNewContactScreen
+                .isErrorContainsText("phone=Phone number must")//cw-25 method in class ContactListScreen
         ;
     }
 
-    @AfterClass
+    @AfterClass//cw-25
     public void postCondition(){
         new ContactListScreen(driver).logout();
     }

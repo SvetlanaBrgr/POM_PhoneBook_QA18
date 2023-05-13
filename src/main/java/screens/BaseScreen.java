@@ -15,7 +15,7 @@ public class BaseScreen {
         PageFactory.initElements(new AppiumFieldDecorator(driver),this);
     }
 
-    public void type(MobileElement element, String text){
+    public void type(MobileElement element, String text){//cw_25 modern if fields empty - т.е перезатирается состояние поля
         element.click();
         element.clear();
 //        if(text == null) return;
